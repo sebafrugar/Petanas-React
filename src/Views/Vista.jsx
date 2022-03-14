@@ -6,7 +6,7 @@ import '../Components/Navbar.css'
 const Vista = () => {
 
     const [links,setLinks]=useState([{titulo:"Tab 1", estado:"active"},{titulo:"Tab 2", estado:""},{titulo:"Tab 3", estado:""}]);
-    const [textos,setTexto] = useState([{textos:"probando texto de la tab1", estado:"contents"},{textos:"probando texto de la tab2", estado:"none"},{textos:"probando texto de la tab3", estado:"none"},])
+    const [textos,setTexto] = useState([{textos:"probando texto de la tab1", estado:"active"},{textos:"probando texto de la tab2", estado:""},{textos:"probando texto de la tab3", estado:""},])
 
     const changeActive = (i) => {
 
@@ -17,7 +17,7 @@ const Vista = () => {
         setLinks(newLink) 
 
         let newTexto = textos.map((texto,x) =>{
-            x===i?texto.estado="contents": texto.estado="none" ;
+            x===i?texto.estado="active": texto.estado="" ;
             return texto
         })
         setTexto(newTexto)        
@@ -42,7 +42,7 @@ const Vista = () => {
             <footer>
                 <div>
                     {
-                        textos.map((texto,i)=>{return(<p key={i} style={{display:`${texto.estado}`}} onClick={() => changeActive(i)}>{texto.textos} </p>)})
+                        textos.filter(x=>x.estado==="active").map((texto,i)=>{return(<p key={i}  onClick={() => changeActive(i)}>{texto.textos} </p>)})
                     }  
                 </div>
             </footer>
